@@ -38,6 +38,7 @@
               </p>
             </a>
           </li>
+          @auth
           <li class="nav-item">
             <a href="/pertanyaan/create" class="nav-link">
               <i class="nav-icon fas fa-plus-square"></i>
@@ -46,6 +47,7 @@
               </p>
             </a>
           </li>
+          @endauth
           
           <li class="nav-header">Halaman Pribadi</li>
           <li class="nav-item">

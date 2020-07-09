@@ -6,12 +6,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Dashboard</h1>
+              <h1 class="m-0 text-dark">Home</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Pertanyaan</a></li>
+                <li class="breadcrumb-item active">Home</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -43,9 +43,9 @@
               <!-- small box -->
               <div class="small-box bg-warning pl-3">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3>{{ $myQuestions }}</h3>
   
-                  <p>Pertanyaan</p>
+                  <p>Pertanyaan Saya</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-help"></i>
@@ -57,8 +57,8 @@
               <!-- small box -->
               <div class="small-box bg-success pl-3">
                 <div class="inner">
-                  <h3>53</h3>
-                  <p>Pertanyaan Terjawab</p>
+                  <h3>{{ $solvedQuestions }}</h3>
+                  <p>Terjawab</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-checkmark"></i>
@@ -79,11 +79,12 @@
     
                     <div class="card-tools">
                       <ul class="pagination pagination-sm float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        {{ $questions->links() }}
+                        {{-- <li class="page-item"><a class="page-link" href="#">«</a></li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li> --}}
                       </ul>
                     </div>
                   </div>
@@ -102,13 +103,13 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($questions as $question)
                         @php
                             $count = 0;
                         @endphp
+                        @foreach ($questions as $question)
                         <tr>
                           <td>{{ ++$count }}</td>
-                          <td>2</td>
+                          <td>{{ $votes[$question->id] }}</td>
                           <td>
                             <a href="#"> {{ $question->judul }} </a>
                           </td>
@@ -118,7 +119,7 @@
                             @endforeach
                           </td>
                           <td>
-                            @if ($question->judul)  
+                            @if ($question->solved)  
                               <i class="icon-solved fas fa-check"></i>
                             @else
                               <i class="icon-not-solved fas fa-times"></i>
