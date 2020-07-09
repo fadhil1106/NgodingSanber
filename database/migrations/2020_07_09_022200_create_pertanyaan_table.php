@@ -18,6 +18,7 @@ class CreatePertanyaanTable extends Migration
             $table->string('judul');
             $table->text('isi');
             $table->string('tag');
+            $table->boolean('solved')->default(0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                   ->references('id')

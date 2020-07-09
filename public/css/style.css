@@ -13,3 +13,19 @@
 .btn-outline-success:hover{
     color: white !important;
 }
+
+.btn-outline-danger{
+    color: #dc3545 !important;
+}
+
+.btn-outline-danger:hover{
+    color: white !important;
+}
+
+.icon-solved{
+    color: #38c172 !important;
+}
+
+.icon-not-solved{
+    color: #dc3545 !important;
+}
