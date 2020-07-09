@@ -19,12 +19,6 @@ class PertanyaanController extends Controller
     {
         $questions = Pertanyaan::orderBy('solved', 'desc')->paginate(15);
         $pertanyaan = new Pertanyaan;
-        $myQuestions = 0;
-        $solvedQuestions = 0;
-        if (Auth::check()) {
-            $myQuestions = $pertanyaan->getUserQuestions(Auth::user()->id);
-            $solvedQuestions = $pertanyaan->getSolvedUserQuestions(Auth::user()->id);
-        }
         //Get Vote for each Question
         $votes = array();
         foreach ($questions as $index => $question) {
@@ -43,7 +37,7 @@ class PertanyaanController extends Controller
             }
         }
         // dd($solvedQuestions);
-        return view('pages.question.index', compact(['questions', 'myQuestions', 'solvedQuestions', 'votes']));
+        return view('pages.question.index', compact(['questions', 'votes']));
     }
 
     public function create()

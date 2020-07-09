@@ -23,7 +23,7 @@ class Pertanyaan extends Model
 
     public function getUserQuestions($userId)
     {
-        $questions = DB::table('pertanyaan')->where('user_id', $userId)->count();
+        $questions = DB::table('pertanyaan')->where('user_id', $userId);
         return $questions;
     }
 

@@ -31,7 +31,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{ route('home') }}" class="nav-link active">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Home
@@ -47,11 +47,9 @@
               </p>
             </a>
           </li>
-          @endauth
-          
           <li class="nav-header">Halaman Pribadi</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url('myquestion') }}" class="nav-link">
               <i class="nav-icon fas fa-list"></i>
               <p>
                 Pertanyaan Anda
@@ -59,7 +57,6 @@
             </a>
           </li>
         </ul>
-        @auth
           <div class="mt-3">
             <form action="{{ route('logout') }}" method="post">
               @csrf

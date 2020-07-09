@@ -22,52 +22,6 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          @auth
-          <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info pl-3">
-                <div class="inner">
-                  <h3>{{ Auth::user()->reputasi }}</h3>
-                  <p>Reputasi Saya</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-heart"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning pl-3">
-                <div class="inner">
-                  <h3>{{ $myQuestions }}</h3>
-  
-                  <p>Pertanyaan Saya</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-help"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-success pl-3">
-                <div class="inner">
-                  <h3>{{ $solvedQuestions }}</h3>
-                  <p>Terjawab</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-checkmark"></i>
-                </div>
-              </div>
-            </div>
-            <!-- ./col -->
-          </div>
-          @endauth
           <!-- /.row -->
           <!-- Main row -->
           <div class="row">
@@ -99,7 +53,7 @@
                           </th>
                           <th>Judul</th>
                           <th style="width: 150px">Tags</th>
-                          <th style="width: 10px">Solved</th>
+                          <th style="width: 10px">Solved?</th>
                         </tr>
                       </thead>
                       <tbody>
