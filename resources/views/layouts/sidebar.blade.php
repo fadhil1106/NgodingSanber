@@ -2,22 +2,28 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
+      <strong> NS </strong>
       <span class="brand-text font-weight-light">NgodingSanber</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="#" class="img-circle elevation-2" >
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+      <div class="mt-0 pb-3 mb-3 d-flex">
+        <div class="brand-link">
+          @if (Auth::user())  
+            <strong> A </strong>
+            <span class="brand-text font-weight-light">Alexander Pierce</span>
+          @else
+            <strong> G </strong>
+            <span class="brand-text font-weight-light">Guest</span>
+          @endif
         </div>
       </div>
-      <a href="{{ route('login') }}" type="button" class="btn btn-block btn-outline-primary btn-sm">Signin</a>
-      <a href="{{ route('register') }}" type="button" class="btn btn-block btn-outline-success btn-sm">Signup</a>
+      @if (!Auth::user())
+        <a href="{{ route('login') }}" type="button" class="btn btn-block btn-outline-primary btn-sm">Signin</a>
+        <a href="{{ route('register') }}" type="button" class="btn btn-block btn-outline-success btn-sm">Signup</a>
+      @endif
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -51,6 +57,11 @@
             </a>
           </li>
         </ul>
+        @auth
+          <div class="mt-3">
+            <a href="{{ Auth::logout() }}" type="button" class="btn btn-block btn-outline-danger btn-sm">Logout</a>
+          </div>
+        @endauth
       </nav>
       <!-- /.sidebar-menu -->
     </div>
