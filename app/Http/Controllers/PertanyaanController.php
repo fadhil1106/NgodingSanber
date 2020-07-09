@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Pertanyaan;
 
 class PertanyaanController extends Controller
 {
@@ -13,7 +16,12 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        return view('pages.question.index');
+        $questions = Pertanyaan::orderBy('solved', 'desc')->paginate(20);
+        foreach ($questions as $index => $question) {
+            $questions[$index]->tag = explode(',',$question->tag);
+        }
+        // dd($questions);
+        return view('pages.question.index', compact('questions'));
     }
 
     /**

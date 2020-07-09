@@ -18,79 +18,121 @@
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-  
+      
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
+          @auth
           <div class="row">
+            <div class="col-lg-2"></div>
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-info">
+              <div class="small-box bg-info pl-3">
                 <div class="inner">
-                  <h3>150</h3>
-  
-                  <p>New Orders</p>
+                  <h3>{{ Auth::user()->reputasi }}</h3>
+                  <p>Reputasi Saya</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="ion ion-heart"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-  
-                  <p>Bounce Rate</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning">
+              <div class="small-box bg-warning pl-3">
                 <div class="inner">
                   <h3>44</h3>
   
-                  <p>User Registrations</p>
+                  <p>Pertanyaan</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="ion ion-help"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-danger">
+              <div class="small-box bg-success pl-3">
                 <div class="inner">
-                  <h3>65</h3>
-  
-                  <p>Unique Visitors</p>
+                  <h3>53</h3>
+                  <p>Pertanyaan Terjawab</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="ion ion-checkmark"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
           </div>
+          @endauth
           <!-- /.row -->
           <!-- Main row -->
           <div class="row">
             <section class="col-lg-12 connectedSortable">
-  
-              
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Pertanyaan</h3>
+    
+                    <div class="card-tools">
+                      <ul class="pagination pagination-sm float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th style="width: 40px">
+                            Votes
+                          </th>
+                          <th>Judul</th>
+                          <th style="width: 150px">Tags</th>
+                          <th style="width: 10px">Solved</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($questions as $question)
+                        @php
+                            $count = 0;
+                        @endphp
+                        <tr>
+                          <td>{{ ++$count }}</td>
+                          <td>2</td>
+                          <td>
+                            <a href="#"> {{ $question->judul }} </a>
+                          </td>
+                          <td>
+                            @foreach ($question->tag as $tag)
+                              <i class="badge bg-primary">{{ $tag }}</i>
+                            @endforeach
+                          </td>
+                          <td>
+                            @if ($question->judul)  
+                              <i class="icon-solved fas fa-check"></i>
+                            @else
+                              <i class="icon-not-solved fas fa-times"></i>
+                            @endif
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
             </section>
           </div>
           <!-- /.row (main row) -->
