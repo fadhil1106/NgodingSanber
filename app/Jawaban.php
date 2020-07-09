@@ -10,6 +10,6 @@ class Jawaban extends Model
 
     public function pertanyaan()
     {
-        return $this->brlongsTo('App\Pertanyaan');
+        return $this->belongsTo('App\Pertanyaan');
     }
 }
