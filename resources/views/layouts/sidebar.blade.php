@@ -33,7 +33,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/pertanyaan/create" class="nav-link">
               <i class="nav-icon fas fa-plus-square"></i>
               <p>
                 Buat Pertanyaan
