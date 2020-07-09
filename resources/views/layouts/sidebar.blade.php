@@ -18,8 +18,8 @@
           <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
-      <a type="button" class="btn btn-block btn-outline-primary btn-sm">Signin</a>
-      <a type="button" class="btn btn-block btn-outline-success btn-sm">Signup</a>
+      <a href="{{ route('login') }}" type="button" class="btn btn-block btn-outline-primary btn-sm">Signin</a>
+      <a href="{{ route('register') }}" type="button" class="btn btn-block btn-outline-success btn-sm">Signup</a>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

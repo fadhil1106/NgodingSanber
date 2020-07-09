@@ -73,9 +73,10 @@
 							<a href="{{ route('password.request') }}">I forgot my password</a>
 						</p>
 					@endif
-          <p class="mb-0">
+          <p class="mb-1">
             <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
           </p>
+          <a href="{{ route('home') }}" class="text-center">Go back to Home</a>
         </div>
         <!-- /.login-card-body -->
       </div>

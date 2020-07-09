@@ -95,8 +95,12 @@
               Sign up using Google+
             </a>
           </div>
-    
-          <a href="login.html" class="text-center">I already have a membership</a>
+          <p class="mb-1">
+            <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+          </p>
+          <p class="mb-0">
+            <a href="{{ route('home') }}" class="text-center">Go back to Home</a>
+          </p>
         </div>
         <!-- /.form-box -->
       </div><!-- /.card -->
