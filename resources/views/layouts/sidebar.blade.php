@@ -12,11 +12,11 @@
       <div class="ml-0 pb-3 mb-1 d-flex">
         <div class="brand-link">
           @if (Auth::user())  
-            <strong class="ml-3"> A </strong>
-            <span class="brand-text font-weight-light">Alexander Pierce</span>
+            <strong class="ml-3"> F </strong>
+            <span class="ml-1 brand-text font-weight-light">{{ Auth::user()->name }}</span>
           @else
             <strong class="ml-3"> G </strong>
-            <span class="brand-text font-weight-light">Guest</span>
+            <span class="ml-1 brand-text font-weight-light">Guest</span>
           @endif
         </div>
       </div>
@@ -59,7 +59,10 @@
         </ul>
         @auth
           <div class="mt-3">
-            <a href="{{ Auth::logout() }}" type="button" class="btn btn-block btn-outline-danger btn-sm">Logout</a>
+            <form action="{{ route('logout') }}" method="post">
+              @csrf
+              <button type="submit" class="btn btn-block btn-outline-danger btn-sm">Logout</button>
+            </form>
           </div>
         @endauth
       </nav>
