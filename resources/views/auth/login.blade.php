@@ -68,11 +68,6 @@
           </div>
           <!-- /.social-auth-links -->
     
-					@if (Route::has('password.request'))
-						<p class="mb-1">
-							<a href="{{ route('password.request') }}">I forgot my password</a>
-						</p>
-					@endif
           <p class="mb-1">
             <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
           </p>
