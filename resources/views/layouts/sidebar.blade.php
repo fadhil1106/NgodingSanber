@@ -2,20 +2,20 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <strong> NS </strong>
+      <strong class="ml-3"> NS </strong>
       <span class="brand-text font-weight-light">NgodingSanber</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="mt-0 pb-3 mb-3 d-flex">
+      <div class="ml-0 pb-3 mb-1 d-flex">
         <div class="brand-link">
           @if (Auth::user())  
-            <strong> A </strong>
+            <strong class="ml-3"> A </strong>
             <span class="brand-text font-weight-light">Alexander Pierce</span>
           @else
-            <strong> G </strong>
+            <strong class="ml-3"> G </strong>
             <span class="brand-text font-weight-light">Guest</span>
           @endif
         </div>
