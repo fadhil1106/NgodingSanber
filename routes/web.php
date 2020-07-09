@@ -11,18 +11,12 @@
 |
 */
 
-Auth::routes();
 
+
+Route::resource('pertanyaan', 'PertanyaanController');
+
+Route::get('/myquestion', 'HomeController@index')->name('myhome');
 Route::get('/', function () {
     return redirect('/pertanyaan');
 })->name('home');
-
-Route::resource('pertanyaan', 'PertanyaanController', 
-                ['names' => [ 
-                    'create' => 'pertanyaan.create',
-                    'show' => 'pertanyaan.show',
-                    'destroy' => 'pertanyaan.destroy'
-                ]]
-);
-
-Route::get('/myquestion', 'HomeController@index');
+Auth::routes();

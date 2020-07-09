@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="{{ asset('css/plugins/tempusdominus-bootstrap-4.min.css') }}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('css/plugins/icheck-bootstrap.min.css') }}">
+  <!-- SweetAlert -->
+  <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert2.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/dist/adminlte.min.css') }}">
   <!-- Custom style -->

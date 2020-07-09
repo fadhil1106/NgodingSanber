@@ -34,6 +34,8 @@ class PertanyaanController extends Controller
                         $votes[$question->id] = 0 - $vote[0]->total_vote;
                     }
                 }
+            }else{
+                $votes[$question->id] = 0;
             }
         }
         // dd($solvedQuestions);
@@ -53,7 +55,7 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "STORE PAGE";
     }
 
     /**
@@ -64,7 +66,7 @@ class PertanyaanController extends Controller
      */
     public function show($id)
     {
-        //
+        echo "SHOW PAGE";
     }
 
     /**
@@ -75,7 +77,7 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo "EDIT PAGE";
     }
 
     /**
@@ -87,7 +89,7 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo "UPDATE PAGE";
     }
 
     /**
@@ -96,8 +98,10 @@ class PertanyaanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pertanyaan $pertanyaan)
     {
-        //
+        $pertanyaan->delete();
+        // Pertanyaan::where('id',$id)->delete();
+        return redirect('/myquestion');
     }
 }

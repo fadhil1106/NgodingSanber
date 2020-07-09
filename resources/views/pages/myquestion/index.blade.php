@@ -104,7 +104,7 @@
                         @endphp
                         @foreach ($questions as $question)
                         <tr>
-                          <td>{{ ++$count }}</td>
+                          <td>{{ $count }}</td>
                           <td>{{ $votes[$question->id] }}</td>
                           <td>
                             <a href="#"> {{ $question->judul }} </a>
@@ -153,10 +153,11 @@
               <p>Anda yakin ingin menghapus pertanyaan?</p>
             </div>
             <div class="modal-footer justify-content-between">
-              <form id="deleteItem" method="DELETE">
+              <form id="deleteItem" method="post">
+                @method('delete')
                 @csrf
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Hapus</button>
+                <button type="submit" class="btn btn-danger deleteSuccess">Hapus</button>
               </form>
             </div>
           </div>
@@ -168,16 +169,20 @@
 @endsection
 
 @push('script')
-    <script>
-      $(document).ready(function () {
-        var id;
-        $('.btndelete').click(function () {
-          id = $(this).data('id')
-          $('#deleteItem').attr('action', '/pertanyaan/'+id)
-        })
-        $('#deleteItem').submit(function (event) {
-          event.preventDefault();
-        })
-      });
+  <script>
+    $(document).ready(function () {
+      var id;
+      $('.btndelete').click(function () {
+        id = $(this).data('id')
+        $('#deleteItem').attr('action', '/pertanyaan/'+id)
+      })
+    });
+
+    $('.deleteSuccess').click(function() {
+      Toast.fire({
+        type: 'success',
+        title: 'Pertanyaan Dihapus.'
+      })
+    });
     </script>
 @endpush

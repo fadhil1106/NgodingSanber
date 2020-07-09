@@ -49,9 +49,11 @@ class HomeController extends Controller
                         $votes[$question->id] = 0 - $vote[0]->total_vote;
                     }
                 }
+            }else{
+                $votes[$question->id] = 0;
             }
         }
-        // dd($solvedQuestions);
+        // dd($questions);
         return view('pages.myquestion.index', compact(['questions', 'myQuestions', 'solvedQuestions', 'votes']));
     }
 }
