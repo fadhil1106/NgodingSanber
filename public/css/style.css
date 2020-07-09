@@ -1,0 +1,15 @@
+.btn-outline-primary{
+    color: #3490dc !important;
+}
+
+.btn-outline-primary:hover{
+    color: white !important;
+}
+
+.btn-outline-success{
+    color: #38c172 !important;
+}
+
+.btn-outline-success:hover{
+    color: white !important;
+}

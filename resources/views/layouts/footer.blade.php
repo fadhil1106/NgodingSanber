@@ -36,4 +36,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="js/dist/demo.js"></script>
 </body>
+
+@stack('script')
 </html>

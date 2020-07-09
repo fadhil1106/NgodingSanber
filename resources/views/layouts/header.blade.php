@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="css/plugins/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/dist/adminlte.min.css">
+  <!-- Custom style -->
+  <link rel="stylesheet" href="css/style.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="css/plugins/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
