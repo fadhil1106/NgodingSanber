@@ -134,8 +134,8 @@
                             </a>
                           </td>
                           <td>
-                            <a href="/pertanyaan/{{$question->id}}/edit" class="btndelete btn btn-warning btn-sm d-inline">
-                              <i class="fas fa-edit"></i>
+                            <a href="/pertanyaan/{{$question->id}}/edit" class="text-white btn btn-warning btn-sm">
+                              <i class="fas fa-pen-square"></i>
                             </a>
                           </td>
                         </tr>
