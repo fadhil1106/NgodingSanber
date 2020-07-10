@@ -1,4 +1,4 @@
-@extends('layouts.master')
+<!-- @extends('layouts.master')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -94,4 +94,4 @@
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
-@endsection
+@endsection -->

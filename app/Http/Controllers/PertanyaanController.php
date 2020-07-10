@@ -55,7 +55,15 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        echo "STORE PAGE";
+        $id = Auth::user()->id;
+        $request->validate([
+            'judul' => 'required',
+            'isi' => 'required',
+            'tag' => 'required'
+        ]);
+
+        $new = Pertanyaan::new_question($request, $id);
+        return redirect('/pertanyaan')->with('status', 'Pertanyaan berhasil ditambahkan');
     }
 
     /**

@@ -19,6 +19,12 @@
       </div>
       <!-- /.content-header -->
       
+      @if (session('message'))
+        <div class="alert alert-info">
+          {{ session('message') }}
+        </div>
+      @endif
+
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -104,7 +110,7 @@
                         @endphp
                         @foreach ($questions as $question)
                         <tr>
-                          <td>{{ $count }}</td>
+                          <td>{{ $loop->iteration }}</td>
                           <td>{{ $votes[$question->id] }}</td>
                           <td>
                             <a href="#"> {{ $question->judul }} </a>
