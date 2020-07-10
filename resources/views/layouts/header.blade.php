@@ -16,10 +16,12 @@
   <link rel="stylesheet" href="{{ asset('css/plugins/icheck-bootstrap.min.css') }}">
   <!-- SweetAlert -->
   <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert2.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('css/dist/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/plugins/dataTables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/plugins/dataTables-responsive.css') }}">
   <!-- Custom style -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('css/dist/adminlte.min.css') }}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('css/plugins/OverlayScrollbars.min.css') }}">
   <!-- Daterange picker -->

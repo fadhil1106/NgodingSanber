@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $questions = Pertanyaan::where('user_id', Auth::user()->id)->paginate(15);
+        $questions = Pertanyaan::where('user_id', Auth::user()->id)->get();
         $pertanyaan = new Pertanyaan;
         $myQuestions = 0;
         $solvedQuestions = 0;
@@ -34,26 +34,24 @@ class HomeController extends Controller
             $myQuestions = $pertanyaan->getUserQuestions(Auth::user()->id)->count();
             $solvedQuestions = $pertanyaan->getSolvedUserQuestions(Auth::user()->id);
         }
-        //Get Vote for each Question
-        $votes = array();
         foreach ($questions as $index => $question) {
             $questions[$index]->tag = explode(',',$question->tag);
             $vote = $pertanyaan->getTotalVotes($question->id);
             if (isset($vote[0])) {
                 if (isset($vote[1])) {
-                    $votes[$question->id] = $vote[0]->total_vote - $vote[1]->total_vote;
+                    $questions[$index]->vote = $vote[0]->total_vote - $vote[1]->total_vote;
                 }else{
                     if ($vote[0]->vote == 'upvote') {
-                        $votes[$question->id] = $vote[0]->total_vote;
+                        $questions[$index]->vote = $vote[0]->total_vote;
                     }else{
-                        $votes[$question->id] = 0 - $vote[0]->total_vote;
+                        $questions[$index]->vote = 0 - $vote[0]->total_vote;
                     }
                 }
             }else{
-                $votes[$question->id] = 0;
+                $questions[$index]->vote = 0;
             }
         }
         // dd($questions);
-        return view('pages.myquestion.index', compact(['questions', 'myQuestions', 'solvedQuestions', 'votes']));
+        return view('pages.myquestion.index', compact(['questions', 'myQuestions', 'solvedQuestions']));
     }
 }

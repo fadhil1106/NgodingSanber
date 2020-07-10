@@ -19,27 +19,25 @@ class PertanyaanController extends Controller
     {
         $questions = Pertanyaan::orderBy('solved', 'desc')->paginate(15);
         $pertanyaan = new Pertanyaan;
-        //Get Vote for each Question
-        $votes = array();
         foreach ($questions as $index => $question) {
             $questions[$index]->tag = explode(',',$question->tag);
             $vote = $pertanyaan->getTotalVotes($question->id);
             if (isset($vote[0])) {
                 if (isset($vote[1])) {
-                    $votes[$question->id] = $vote[0]->total_vote - $vote[1]->total_vote;
+                    $questions[$index]->vote = $vote[0]->total_vote - $vote[1]->total_vote;
                 }else{
                     if ($vote[0]->vote == 'upvote') {
-                        $votes[$question->id] = $vote[0]->total_vote;
+                        $questions[$index]->vote = $vote[0]->total_vote;
                     }else{
-                        $votes[$question->id] = 0 - $vote[0]->total_vote;
+                        $questions[$index]->vote = 0 - $vote[0]->total_vote;
                     }
                 }
             }else{
-                $votes[$question->id] = 0;
+                $questions[$index]->vote = 0;
             }
         }
-        // dd($solvedQuestions);
-        return view('pages.question.index', compact(['questions', 'votes']));
+        // dd($questions);
+        return view('pages.question.index', compact(['questions']));
     }
 
     public function create()
@@ -63,7 +61,7 @@ class PertanyaanController extends Controller
         ]);
 
         $new = Pertanyaan::new_question($request, $id);
-        return redirect('/pertanyaan')->with('status', 'Pertanyaan berhasil ditambahkan');
+        return redirect()->route('pertanyaan.home')->with('status', 'Pertanyaan berhasil ditambahkan');
     }
 
     /**
@@ -74,7 +72,25 @@ class PertanyaanController extends Controller
      */
     public function show($id)
     {
-        echo "SHOW PAGE";
+        $question = Pertanyaan::findOrFail($id);
+        $pertanyaan = new Pertanyaan;
+        $question->tag = explode(',',$question->tag);
+        $vote = $pertanyaan->getTotalVotes($question->id);
+        if (isset($vote[0])) {
+            if (isset($vote[1])) {
+                $question->vote = $vote[0]->total_vote - $vote[1]->total_vote;
+            }else{
+                if ($vote[0]->vote == 'upvote') {
+                    $question->vote = $vote[0]->total_vote;
+                }else{
+                    $question->vote = 0 - $vote[0]->total_vote;
+                }
+            }
+        }else{
+            $question->vote = 0;
+        }
+        // dd($questions);
+        return view('pages.question.show', compact(['question']));
     }
 
     /**
