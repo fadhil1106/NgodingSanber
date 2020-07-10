@@ -37,7 +37,7 @@ class PertanyaanController extends Controller
             }
         }
         // dd($questions);
-        return view('pages.question.index', compact(['questions', 'votes']));
+        return view('pages.question.index', compact(['questions']));
     }
 
     public function create()

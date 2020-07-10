@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="{{ asset('css/plugins/icheck-bootstrap.min.css') }}">
   <!-- SweetAlert -->
   <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert2.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/plugins/dataTables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/plugins/dataTables-responsive.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/dist/adminlte.min.css') }}">
   <!-- Custom style -->

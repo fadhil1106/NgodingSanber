@@ -90,12 +90,11 @@
               </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">
-              <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+            <div class="card-body">
+              <table id="example1" class="table table-striped dataTable dtr-inline" role="grid"
                 aria-describedby="example1_info">
                 <thead>
                   <tr role="row">
-                    <th style="width: 10px" tabindex="0" rowspan="1" colspan="1">#</th>
                     <th style="width: 40px" tabindex="0" rowspan="1" colspan="1">Votes</th>
                     <th tabindex="0" rowspan="1" colspan="1">Judul</th>
                     <th style="width: 150px" tabindex="0" rowspan="1" colspan="1">Tags</th>
@@ -104,12 +103,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @php
-                  $count = 0;
-                  @endphp
                   @foreach ($questions as $question)
                   <tr role="row">
-                    <td tabindex="0">{{ ++$count }}</td>
                     <td>{{ $question->vote }}</td>
                     <td>
                       <a href="#"> {{ $question->judul }} </a>
@@ -192,11 +187,7 @@
     });
 
     $('#example1').DataTable({
-      "columnDefs": [ {
-      "targets": 0,
-      "orderable": false
-      } ],
-      "order": [[1, "desc"]],
+      "order": [[0, "desc"]],
       "paging": true,
       "lengthChange": false,
       "searching": false,

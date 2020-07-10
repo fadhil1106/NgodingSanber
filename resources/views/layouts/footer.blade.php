@@ -18,7 +18,7 @@
 <script src="js/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="js/plugins/jquery/jquery-ui.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="js/plugins/jquery/jquery-dataTables.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -38,6 +38,7 @@
 <script src="js/dist/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="js/dist/demo.js"></script>
+<script src="js/plugins/dataTables.js"></script>
 
 <script>
   $(function() {

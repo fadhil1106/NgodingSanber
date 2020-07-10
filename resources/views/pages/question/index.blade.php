@@ -33,50 +33,39 @@
     
                     <div class="card-tools">
                       <ul class="pagination pagination-sm float-right">
-                        {{ $questions->links() }}
-                        {{-- <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li> --}}
+                        {{-- {{ $questions->links() }} --}}
                       </ul>
                     </div>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body p-0">
-                    <table class="table">
+                  <div class="card-body">
+                    <table id="example1" class="table table-striped dataTable dtr-inline" role="grid"
+                      aria-describedby="example1_info">
                       <thead>
-                        <tr>
-                          <th style="width: 10px">#</th>
-                          <th style="width: 40px">
-                            Votes
-                          </th>
-                          <th>Judul</th>
-                          <th style="width: 150px">Tags</th>
-                          <th style="width: 10px">Solved?</th>
+                        <tr role="row">
+                          <th style="width: 40px" tabindex="0" rowspan="1" colspan="1">Votes</th>
+                          <th tabindex="0" rowspan="1" colspan="1">Judul</th>
+                          <th style="width: 150px" tabindex="0" rowspan="1" colspan="1">Tags</th>
+                          <th style="width: 10px" tabindex="0" rowspan="1" colspan="1">Solved?</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @php
-                            $count = 0;
-                        @endphp
                         @foreach ($questions as $question)
-                        <tr>
-                          <td>{{ ++$count }}</td>
-                          <td>{{ $votes[$question->id] }}</td>
+                        <tr role="row">
+                          <td>{{ $question->vote }}</td>
                           <td>
                             <a href="#"> {{ $question->judul }} </a>
                           </td>
                           <td>
                             @foreach ($question->tag as $tag)
-                              <i class="badge bg-primary">{{ $tag }}</i>
+                            <i class="badge bg-primary">{{ $tag }}</i>
                             @endforeach
                           </td>
                           <td>
-                            @if ($question->solved)  
-                              <i class="icon-solved fas fa-check"></i>
+                            @if ($question->solved)
+                            <i class="icon-solved fas fa-check"></i>
                             @else
-                              <i class="icon-not-solved fas fa-times"></i>
+                            <i class="icon-not-solved fas fa-times"></i>
                             @endif
                           </td>
                         </tr>
@@ -95,3 +84,18 @@
       </section>
       <!-- /.content -->
 @endsection
+
+@push('script')
+    <script>
+      $('#example1').DataTable({
+      "order": [[0, "desc"]],
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    </script>
+@endpush
