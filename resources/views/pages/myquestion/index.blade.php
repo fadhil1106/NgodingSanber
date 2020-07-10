@@ -53,6 +53,81 @@
 
             <p>Pertanyaan Saya</p>
           </div>
+          @endauth
+          <!-- /.row -->
+          <!-- Main row -->
+          <div class="row">
+            <section class="col-lg-12 connectedSortable">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Pertanyaan</h3>
+    
+                    <div class="card-tools">
+                      <ul class="pagination pagination-sm float-right">
+                        {{ $questions->links() }}
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th style="width: 40px">
+                            Votes
+                          </th>
+                          <th>Judul</th>
+                          <th style="width: 150px">Tags</th>
+                          <th style="width: 10px">Solved?</th>
+                          <th style="width: 7px"></th>
+                          <th style="width: 7px"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php
+                            $count = 0;
+                        @endphp
+                        @foreach ($questions as $question)
+                        <tr>
+                          <td>{{ $loop->iteration }}</td>
+                          <td>{{ $votes[$question->id] }}</td>
+                          <td>
+                            <a href="/pertanyaan/{{$question->id}}"> {{ $question->judul }} </a>
+                          </td>
+                          <td>
+                            @foreach ($question->tag as $tag)
+                              <i class="badge bg-primary">{{ $tag }}</i>
+                            @endforeach
+                          </td>
+                          <td>
+                            @if ($question->solved)  
+                              <i class="icon-solved fas fa-check"></i>
+                            @else
+                              <i class="icon-not-solved fas fa-times"></i>
+                            @endif
+                          </td>
+                          <td>
+                            <a href="#" data-id="{{ $question->id }}" data-toggle="modal" data-target="#modal-delete" class="btndelete btn btn-danger btn-sm">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/pertanyaan/{{$question->id}}/edit" class="text-white btn btn-warning btn-sm">
+                              <i class="fas fa-pen-square"></i>
+                            </a>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </section>
           <div class="icon">
             <i class="ion ion-help"></i>
           </div>

@@ -25,5 +25,6 @@ Route::get('/myquestion', 'HomeController@index')->name('myhome');
 Route::get('/', function () {
     return redirect()->route('pertanyaan.home');
 })->name('home');
-
 Auth::routes();
+
+Route::resource('/profile', 'ProfileController');

@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{ route('home') }}" class="brand-link">
       <strong class="ml-3"> NS </strong>
       <span class="brand-text font-weight-light">NgodingSanber</span>
     </a>
@@ -12,8 +12,17 @@
       <div class="ml-0 pb-3 mb-1 d-flex">
         <div class="brand-link">
           @if (Auth::user())  
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="{{ asset('images/mas mas.png')}}" class="img-circle elevation-2">
+            </div>
+            <div class="info">
+              <a href="{{ url('/profile')}}" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
+          </div>
+          <!-- </div>
             <strong class="ml-3"> F </strong>
-            <span class="ml-1 brand-text font-weight-light">{{ Auth::user()->name }}</span>
+            <span class="ml-1 brand-text font-weight-light">{{ Auth::user()->name }}</span> -->
           @else
             <strong class="ml-3"> G </strong>
             <span class="ml-1 brand-text font-weight-light">Guest</span>
