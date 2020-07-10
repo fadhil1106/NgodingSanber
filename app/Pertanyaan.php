@@ -59,4 +59,15 @@ class Pertanyaan extends Model
         ]);
         return $data;
     }
+
+    public static function edit($data, $id)
+    {
+        $edit = DB::table('pertanyaan')->update([
+            'judul' => $data['judul'],
+            'isi' => $data['isi'],
+            'tag' => $data['tag'] 
+        ]);
+
+        return $data;
+    }
 }

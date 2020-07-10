@@ -65,7 +65,7 @@
                           <td>{{ ++$count }}</td>
                           <td>{{ $votes[$question->id] }}</td>
                           <td>
-                            <a href="#"> {{ $question->judul }} </a>
+                            <a href="/pertanyaan/{{$question->id}}"> {{ $question->judul }} </a>
                           </td>
                           <td>
                             @foreach ($question->tag as $tag)

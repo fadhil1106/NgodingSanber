@@ -101,7 +101,8 @@
                           <th>Judul</th>
                           <th style="width: 150px">Tags</th>
                           <th style="width: 10px">Solved?</th>
-                          <th style="width: 10px"></th>
+                          <th style="width: 7px"></th>
+                          <th style="width: 7px"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -113,7 +114,7 @@
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $votes[$question->id] }}</td>
                           <td>
-                            <a href="#"> {{ $question->judul }} </a>
+                            <a href="/pertanyaan/{{$question->id}}"> {{ $question->judul }} </a>
                           </td>
                           <td>
                             @foreach ($question->tag as $tag)
@@ -130,6 +131,11 @@
                           <td>
                             <a href="#" data-id="{{ $question->id }}" data-toggle="modal" data-target="#modal-delete" class="btndelete btn btn-danger btn-sm">
                               <i class="fas fa-trash"></i>
+                            </a>
+                          </td>
+                          <td>
+                            <a href="/pertanyaan/{{$question->id}}/edit" class="btndelete btn btn-warning btn-sm d-inline">
+                              <i class="fas fa-edit"></i>
                             </a>
                           </td>
                         </tr>
