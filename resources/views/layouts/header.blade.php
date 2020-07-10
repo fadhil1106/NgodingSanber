@@ -18,10 +18,10 @@
   <link rel="stylesheet" href="{{ asset('css/plugins/sweetalert2.css') }}">
   <link rel="stylesheet" href="{{ asset('css/plugins/dataTables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/plugins/dataTables-responsive.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('css/dist/adminlte.min.css') }}">
   <!-- Custom style -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('css/dist/adminlte.min.css') }}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('css/plugins/OverlayScrollbars.min.css') }}">
   <!-- Daterange picker -->

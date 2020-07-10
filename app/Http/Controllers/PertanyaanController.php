@@ -61,7 +61,7 @@ class PertanyaanController extends Controller
         ]);
 
         $new = Pertanyaan::new_question($request, $id);
-        return redirect('/pertanyaan')->with('status', 'Pertanyaan berhasil ditambahkan');
+        return redirect()->route('pertanyaan.home')->with('status', 'Pertanyaan berhasil ditambahkan');
     }
 
     /**
@@ -72,7 +72,25 @@ class PertanyaanController extends Controller
      */
     public function show($id)
     {
-        echo "SHOW PAGE";
+        $question = Pertanyaan::findOrFail($id);
+        $pertanyaan = new Pertanyaan;
+        $question->tag = explode(',',$question->tag);
+        $vote = $pertanyaan->getTotalVotes($question->id);
+        if (isset($vote[0])) {
+            if (isset($vote[1])) {
+                $question->vote = $vote[0]->total_vote - $vote[1]->total_vote;
+            }else{
+                if ($vote[0]->vote == 'upvote') {
+                    $question->vote = $vote[0]->total_vote;
+                }else{
+                    $question->vote = 0 - $vote[0]->total_vote;
+                }
+            }
+        }else{
+            $question->vote = 0;
+        }
+        // dd($questions);
+        return view('pages.question.show', compact(['question']));
     }
 
     /**

@@ -29,3 +29,19 @@
 .icon-not-solved{
     color: #dc3545 !important;
 }
+
+.text-total-vote{
+    font-size: medium;
+    width: 100%;
+}
+
+.btn-vote-width{
+    width: 100%;
+}
+
+.btn-upvote{
+    color: #38c172;
+}
+.btn-downvote{
+    color: #dc3545;
+}

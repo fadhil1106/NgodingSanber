@@ -107,7 +107,7 @@
                   <tr role="row">
                     <td>{{ $question->vote }}</td>
                     <td>
-                      <a href="#"> {{ $question->judul }} </a>
+                      <a href="{{ route('pertanyaan.show',$question->id) }}"> {{ $question->judul }} </a>
                     </td>
                     <td>
                       @foreach ($question->tag as $tag)
@@ -172,29 +172,29 @@
 @push('script')
 <script>
   $(document).ready(function () {
-      var id;
-      $('.btndelete').click(function () {
-        id = $(this).data('id')
-        $('#deleteItem').attr('action', '/pertanyaan/'+id)
-      })
-    });
+    var id;
+    $('.btndelete').click(function () {
+      id = $(this).data('id')
+      $('#deleteItem').attr('action', '/pertanyaan/'+id)
+    })
+  });
 
-    $('.deleteSuccess').click(function() {
-      Toast.fire({
-        type: 'success',
-        title: 'Pertanyaan Dihapus.'
-      })
-    });
+  $('.deleteSuccess').click(function() {
+    Toast.fire({
+      type: 'success',
+      title: 'Pertanyaan Dihapus.'
+    })
+  });
 
-    $('#example1').DataTable({
-      "order": [[0, "desc"]],
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+  $('#example1').DataTable({
+    "order": [[0, "desc"]],
+    "paging": true,
+    "lengthChange": false,
+    "searching": false,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    "responsive": true,
+  });
 </script>
 @endpush

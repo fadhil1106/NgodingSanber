@@ -15,30 +15,30 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="js/plugins/jquery/jquery.min.js"></script>
+<script src="{{asset('js/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="js/plugins/jquery/jquery-ui.min.js"></script>
-<script src="js/plugins/jquery/jquery-dataTables.js"></script>
+<script src="{{asset('js/plugins/jquery/jquery-ui.min.js')}}"></script>
+<script src="{{asset('js/plugins/jquery/jquery-dataTables.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="js/plugins/bootstrap.bundle.min.js"></script>
+<script src="{{asset('js/plugins/bootstrap.bundle.min.js')}}"></script>
 <!-- daterangepicker -->
-<script src="js/plugins/moment.min.js"></script>
-<script src="js/plugins/daterangepicker.js"></script>
+<script src="{{asset('js/plugins/moment.min.js')}}"></script>
+<script src="{{asset('js/plugins/daterangepicker.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="js/plugins/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{{asset('js/plugins/tempusdominus-bootstrap-4.min.js')}}"></script>
 {{-- SweetAlert2 --}}
-<script src="js/plugins/sweetalert2.js"></script>
+<script src="{{asset('js/plugins/sweetalert2.js')}}"></script>
 <!-- overlayScrollbars -->
-<script src="js/plugins/jquery.overlayScrollbars.min.js"></script>
+<script src="{{asset('js/plugins/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="js/dist/adminlte.js"></script>
+<script src="{{asset('js/dist/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="js/dist/demo.js"></script>
-<script src="js/plugins/dataTables.js"></script>
+<script src="{{asset('js/dist/demo.js')}}"></script>
+<script src="{{asset('js/plugins/dataTables.js')}}"></script>
 
 <script>
   $(function() {

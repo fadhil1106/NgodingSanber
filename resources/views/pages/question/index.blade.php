@@ -18,6 +18,12 @@
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
+
+      @if (session('message'))
+      <div class="alert alert-info">
+        {{ session('message') }}
+      </div>
+      @endif
       
       <!-- Main content -->
       <section class="content">
@@ -54,7 +60,7 @@
                         <tr role="row">
                           <td>{{ $question->vote }}</td>
                           <td>
-                            <a href="#"> {{ $question->judul }} </a>
+                            <a href="{{ route('pertanyaan.show',$question->id) }}"> {{ $question->judul }} </a>
                           </td>
                           <td>
                             @foreach ($question->tag as $tag)
