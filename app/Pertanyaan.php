@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class Pertanyaan extends Model
 {
@@ -58,5 +59,16 @@ class Pertanyaan extends Model
     public function votePertanyaan()
     {
         return $this->hasMany('App\VotePertanyaan');
+    }
+
+    public static function new_question($data, $id)
+    {
+        $new = DB::table('pertanyaan')->insert([
+            'judul' => $data['judul'],
+            'isi' => $data['isi'],
+            'tag' => $data['tag'],
+            'user_id' => $id
+        ]);
+        return $data;
     }
 }

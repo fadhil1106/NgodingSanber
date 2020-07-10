@@ -18,6 +18,12 @@
   </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
+      
+@if (session('message'))
+<div class="alert alert-info">
+  {{ session('message') }}
+</div>
+@endif
 
 <!-- Main content -->
 <section class="content">
