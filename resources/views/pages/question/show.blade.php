@@ -41,11 +41,11 @@
 							<div><strong>Komentar</strong></div>
 						</div>
 						<div class="row">
-							{{-- @foreach ($comments as $comment) --}}
-								<dd><blockquote class="mb-0 mt-1">
-									<p><small>. <br><a href="#"><i>Nama Pengkomentar</i></a></small></p>
-								</blockquote></dd>
-							{{-- @endforeach --}}
+							<dd><blockquote class="mb-0 mt-1">
+								@foreach ($commentsQuestion as $commentQuestion)
+								<p><small>{{ $commentQuestion->komentar }}. <br><a href="#"><i>{{ $commentQuestion->user->name }}</i></a></small></p>
+								@endforeach
+							</blockquote></dd>
 						</div>
 					</div>
 					@auth

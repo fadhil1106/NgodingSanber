@@ -55,7 +55,8 @@ class PertanyaanController extends Controller
     {
         $question = Pertanyaan::findOrFail($id);
         $answers = Jawaban::orderBy('jawaban_tepat', 'desc')->get();
-        // $commentsQuestion = KomentarPertanyaan::find($id); 
+        $commentsQuestion = KomentarPertanyaan::where('pertanyaan_id',$id)->get(); 
+        // dd($commentsQuestion);
 
         $pertanyaan = new Pertanyaan;
         $jawaban = new Jawaban;
@@ -75,7 +76,7 @@ class PertanyaanController extends Controller
         });
         // dd($answers);
         
-        return view('pages.question.show', compact(['question', 'answers']));
+        return view('pages.question.show', compact(['question', 'answers', 'commentsQuestion']));
     }
 
     public function edit($id)
