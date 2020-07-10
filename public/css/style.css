@@ -45,3 +45,15 @@
 .btn-downvote{
     color: #dc3545;
 }
+
+.user-image{
+    margin: 0 auto;
+}
+
+.nilai{
+    font-size: 32px !important;
+}
+
+.center{
+    margin: 0 auto !important;
+}

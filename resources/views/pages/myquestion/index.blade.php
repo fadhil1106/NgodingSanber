@@ -19,9 +19,9 @@
 </div>
 <!-- /.content-header -->
 
-@if (session('message'))
+@if (session('status'))
 <div class="alert alert-info">
-  {{ session('message') }}
+  {{ session('status') }}
 </div>
 @endif
 
