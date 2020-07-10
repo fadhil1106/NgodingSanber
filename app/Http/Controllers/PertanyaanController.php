@@ -19,26 +19,24 @@ class PertanyaanController extends Controller
     {
         $questions = Pertanyaan::orderBy('solved', 'desc')->paginate(15);
         $pertanyaan = new Pertanyaan;
-        //Get Vote for each Question
-        $votes = array();
         foreach ($questions as $index => $question) {
             $questions[$index]->tag = explode(',',$question->tag);
             $vote = $pertanyaan->getTotalVotes($question->id);
             if (isset($vote[0])) {
                 if (isset($vote[1])) {
-                    $votes[$question->id] = $vote[0]->total_vote - $vote[1]->total_vote;
+                    $questions[$index]->vote = $vote[0]->total_vote - $vote[1]->total_vote;
                 }else{
                     if ($vote[0]->vote == 'upvote') {
-                        $votes[$question->id] = $vote[0]->total_vote;
+                        $questions[$index]->vote = $vote[0]->total_vote;
                     }else{
-                        $votes[$question->id] = 0 - $vote[0]->total_vote;
+                        $questions[$index]->vote = 0 - $vote[0]->total_vote;
                     }
                 }
             }else{
-                $votes[$question->id] = 0;
+                $questions[$index]->vote = 0;
             }
         }
-        // dd($solvedQuestions);
+        // dd($questions);
         return view('pages.question.index', compact(['questions', 'votes']));
     }
 

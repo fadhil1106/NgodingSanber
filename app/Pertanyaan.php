@@ -11,6 +11,8 @@ class Pertanyaan extends Model
 
     protected $fillable = ['judul', 'isi', 'tag', 'user_id'];
 
+    protected $appends = ['vote' => 0];
+
     public function getTotalVotes($questionId)
     {
         $votes =  DB::table('vote_pertanyaan')
@@ -20,7 +22,7 @@ class Pertanyaan extends Model
                     ->get();
         return $votes;
     }
-
+    
     public function getUserQuestions($userId)
     {
         $questions = DB::table('pertanyaan')->where('user_id', $userId);
@@ -31,6 +33,16 @@ class Pertanyaan extends Model
     {
         $questions = DB::table('pertanyaan')->where([['user_id', $userId],['solved', 1]])->count();
         return $questions;
+    }
+
+    public function getVoteAttribute()
+    {
+        return $this->appends['vote'];
+    }
+
+    public function setVoteAttribute($value)
+    {
+        $this->appends['vote'] = $value;
     }
 
     public function user()
