@@ -11,7 +11,11 @@
       <!-- Sidebar user panel (optional) -->  
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-              <img src="{{ asset('images/mas mas.png')}}" class="img-circle elevation-2">
+            @if (Auth::user())
+              <img src="{{ asset('images/profiles/mas mas.png')}}" class="img-circle elevation-2">
+            @else
+              <img src="{{ asset('images/profiles/boxed-bg.png')}}" class="img-circle elevation-2">
+            @endif
             </div>
             <div class="info">
               @if (Auth::user())
