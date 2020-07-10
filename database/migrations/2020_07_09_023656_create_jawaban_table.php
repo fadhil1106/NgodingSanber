@@ -22,12 +22,11 @@ class CreateJawabanTable extends Migration
                   ->references('id')
                   ->on('pertanyaan')
                   ->onDelete('cascade');
-            $table->unsignedBigInteger('jawaban_id');
-            $table->foreign('jawaban_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('jawaban')
+                ->on('users')
                 ->onDelete('cascade');
-            
                 $table->timestamps();
         });
     }
