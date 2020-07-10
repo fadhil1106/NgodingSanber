@@ -12,4 +12,9 @@ class Jawaban extends Model
     {
         return $this->belongsTo('App\Pertanyaan');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
