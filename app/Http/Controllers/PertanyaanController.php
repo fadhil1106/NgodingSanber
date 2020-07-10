@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Jawaban;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Pertanyaan;
+use App\Jawaban;
+use App\KomentarPertanyaan;
+use Illuminate\Support\Facades\Session;
 
 class PertanyaanController extends Controller
 {
@@ -52,25 +54,27 @@ class PertanyaanController extends Controller
     public function show($id)
     {
         $question = Pertanyaan::findOrFail($id);
-        $answers = Jawaban::all();
-        // dd($answer);
+        $answers = Jawaban::orderBy('jawaban_tepat', 'desc')->get();
+        // $commentsQuestion = KomentarPertanyaan::find($id); 
+
         $pertanyaan = new Pertanyaan;
+        $jawaban = new Jawaban;
         $question->tag = explode(',',$question->tag);
-        $vote = $pertanyaan->getTotalVotes($question->id);
-        if (isset($vote[0])) {
-            if (isset($vote[1])) {
-                $question->vote = $vote[0]->total_vote - $vote[1]->total_vote;
-            }else{
-                if ($vote[0]->vote == 'upvote') {
-                    $question->vote = $vote[0]->total_vote;
-                }else{
-                    $question->vote = 0 - $vote[0]->total_vote;
-                }
-            }
-        }else{
-            $question->vote = 0;
+        
+        $votePertanyaan = $pertanyaan->getTotalVotes($question->id);
+        $question->vote = $this->getTotalVote($votePertanyaan);
+        
+        foreach ($answers as $index => $answer) {
+            $votePertanyaan = $jawaban->getTotalVotes($answer->id);
+            $answers[$index]->vote = $this->getTotalVote($votePertanyaan);
         }
-        // dd($questions);
+
+        $answers = $answers->sortByDesc(function($answer)
+        {
+           return $answer->vote; 
+        });
+        // dd($answers);
+        
         return view('pages.question.show', compact(['question', 'answers']));
     }
 

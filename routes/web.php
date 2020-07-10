@@ -20,6 +20,12 @@ Route::resource('pertanyaan', 'PertanyaanController', ['names' =>[
     'destroy'   => 'pertanyaan.destroy' 
 ]]);
 
+Route::resource('komentar', 'komentarController', ['names' =>[
+    'store'    => 'komentar.store',
+    'update'   => 'komentar.update',
+    'destroy'   => 'komentar.destroy'
+]]);
+
 Route::get('/myquestion', 'HomeController@index')->name('myhome');
 
 Route::get('/', function () {

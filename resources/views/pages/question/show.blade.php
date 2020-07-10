@@ -25,33 +25,58 @@
 			<div class="col-md-11">
 				<div class="card">
 					<div class="card-header">
-						<strong>{{$question->judul}}</strong>
+						<div class="card-title">
+							<p><span class="text-primary">{{$question->user->name}}</span></p>
+							<strong>{{$question->judul}}</strong>
+						</div>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+						</div>
 					</div>
 					<div class="card-body">
 						<p>{{$question->isi}}</p>
+						<div class="row">
+							<div><strong>Komentar</strong></div>
+						</div>
+						<div class="row">
+							{{-- @foreach ($comments as $comment) --}}
+								<dd><blockquote class="mb-0 mt-1">
+									<p><small>. <br><a href="#"><i>Nama Pengkomentar</i></a></small></p>
+								</blockquote></dd>
+							{{-- @endforeach --}}
+						</div>
 					</div>
-					<div class="row ml-3 mr-3 mb-2">
-						<div>Pertanyaan : <span class="text-primary">{{$question->user->name}}</span></div>
-					</div>
+					@auth
 					<div class="card-footer">
-						<form action="#" method="post">
+						<form action="{{ route('komentar.store') }}" method="post">
+							@csrf
 							<div class="input-group">
-								<input type="text" name="message" placeholder="Tulis Komentar ..." class="form-control">
+								<input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>
+								<input type="text" name="pertanyaan_id" value="{{ $question->id }}" hidden>
+								<input type="text" name="komentar" placeholder="Tulis Komentar ..." class="form-control">
 								<span class="input-group-append">
-									<button type="button" class="btn btn-primary">Kirim</button>
+									<button type="submit" class="btn btn-primary">Kirim</button>
 								</span>
 							</div>
 						</form>
 					</div>
+					@endauth
 				</div>
 			</div>
 		</div>
 	</div><!-- /.container-fluid -->
 
-	<div class="row">
-		<div class="col-sm-6">
+	<div class="row mb-4">
+		<div class="col-md-10">
 			<h3 class="m-1 text-dark">Jawaban</h3>
 		</div><!-- /.col -->
+		<div class="col-md-2">
+			<button type="button" class="btn btn-md btn-success col-md-12" data-card-widget="collapse">
+				Tambah Jawaban
+			</button>
+		</div>
 	</div>
 	@foreach ($answers as $answer)
 	<div class="row">
@@ -63,7 +88,7 @@
 			</div>
 			<div class="row">
 				<div class="text-total-vote" style="text-align: center">
-					<strong></strong>
+					<strong>{{$answer->vote}}</strong>
 				</div>
 			</div>
 			<div class="row">
@@ -75,7 +100,15 @@
 		<div class="col-md-11">
 			<div class="card">
 				<div class="card-header">
-					<div><span class="text-primary">{{$answer->user->name}}</span></div>
+					<div class="card-title">
+						<p>{{$answer->jawaban}}</p>
+						<div><span class="text-primary">{{$answer->user->name}}</span></div>
+					</div>
+					<div class="card-tools">
+						<button type="button" class="btn btn-tool" data-card-widget="collapse">
+							<i class="fas fa-minus"></i>
+						</button>
+					</div>
 				</div>
 				<div class="card-body">
 					<p>{{$answer->jawaban}}</p>
