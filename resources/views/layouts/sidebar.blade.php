@@ -8,27 +8,19 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="ml-0 pb-3 mb-1 d-flex">
-        <div class="brand-link">
-          @if (Auth::user())  
+      <!-- Sidebar user panel (optional) -->  
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
               <img src="{{ asset('images/mas mas.png')}}" class="img-circle elevation-2">
             </div>
             <div class="info">
+              @if (Auth::user())
               <a href="{{ url('/profile')}}" class="d-block">{{ Auth::user()->name }}</a>
+              @else
+              <a href="{{ route('login')}}" class="d-block">Guest</a>
+              @endif
             </div>
           </div>
-          <!-- </div>
-            <strong class="ml-3"> F </strong>
-            <span class="ml-1 brand-text font-weight-light">{{ Auth::user()->name }}</span> -->
-          @else
-            <strong class="ml-3"> G </strong>
-            <span class="ml-1 brand-text font-weight-light">Guest</span>
-          @endif
-        </div>
-      </div>
       @if (!Auth::user())
         <a href="{{ route('login') }}" type="button" class="btn btn-block btn-outline-primary btn-sm">Signin</a>
         <a href="{{ route('register') }}" type="button" class="btn btn-block btn-outline-success btn-sm">Signup</a>
