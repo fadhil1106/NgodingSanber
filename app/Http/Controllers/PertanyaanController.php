@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jawaban;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -10,11 +11,7 @@ use App\Pertanyaan;
 
 class PertanyaanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $questions = Pertanyaan::orderBy('solved', 'desc')->paginate(15);
@@ -22,19 +19,7 @@ class PertanyaanController extends Controller
         foreach ($questions as $index => $question) {
             $questions[$index]->tag = explode(',',$question->tag);
             $vote = $pertanyaan->getTotalVotes($question->id);
-            if (isset($vote[0])) {
-                if (isset($vote[1])) {
-                    $questions[$index]->vote = $vote[0]->total_vote - $vote[1]->total_vote;
-                }else{
-                    if ($vote[0]->vote == 'upvote') {
-                        $questions[$index]->vote = $vote[0]->total_vote;
-                    }else{
-                        $questions[$index]->vote = 0 - $vote[0]->total_vote;
-                    }
-                }
-            }else{
-                $questions[$index]->vote = 0;
-            }
+            $questions[$index]->vote = $this->getTotalVote($vote);
         }
         // dd($questions);
         return view('pages.question.index', compact(['questions']));
@@ -45,12 +30,6 @@ class PertanyaanController extends Controller
         return view('pages.myquestion.new');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $id = Auth::user()->id;
@@ -73,6 +52,8 @@ class PertanyaanController extends Controller
     public function show($id)
     {
         $question = Pertanyaan::findOrFail($id);
+        $answers = Jawaban::all();
+        // dd($answer);
         $pertanyaan = new Pertanyaan;
         $question->tag = explode(',',$question->tag);
         $vote = $pertanyaan->getTotalVotes($question->id);
@@ -90,28 +71,15 @@ class PertanyaanController extends Controller
             $question->vote = 0;
         }
         // dd($questions);
-        return view('pages.question.show', compact(['question']));
+        return view('pages.question.show', compact(['question', 'answers']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $data = Pertanyaan::find($id);
         return view('pages.myquestion.edit', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $edit = Pertanyaan::edit($request, $id);
@@ -119,16 +87,29 @@ class PertanyaanController extends Controller
         return redirect('/pertanyaan')->with('status', 'Pertanyaan berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Pertanyaan $pertanyaan)
     {
         $pertanyaan->delete();
         // Pertanyaan::where('id',$id)->delete();
         return redirect('/myquestion');
+    }
+
+    public function getTotalVote($dataVote)
+    {
+        $result = 0;
+        if (isset($dataVote[0])) {
+            if (isset($dataVote[1])) {
+                $result = $dataVote[0]->total_vote - $dataVote[1]->total_vote;
+            }else{
+                if ($dataVote[0]->vote == 'upvote') {
+                    $result = $dataVote[0]->total_vote;
+                }else{
+                    $result = 0 - $dataVote[0]->total_vote;
+                }
+            }
+        }else{
+            $result = 0;
+        }
+        return $result;
     }
 }
