@@ -12,11 +12,11 @@ class KomentarController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
-        if (isset($request->pertanyaan_id)) {
-            KomentarPertanyaan::create($request->all());
-        }elseif(isset($request->pertanyaan_id)){
+        // dd($request->all());
+        if (isset($request->jawaban_id)) { //harus cek jawaban dulu sebelum pertanyaan
             KomentarJawaban::create($request->all());
+        }elseif(isset($request->pertanyaan_id)){
+            KomentarPertanyaan::create($request->all());
         }
         $request->session()->flash('message', 'Komentar ditambahkan');
         return redirect()->route('pertanyaan.show', $request->pertanyaan_id);

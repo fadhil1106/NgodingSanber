@@ -42,4 +42,8 @@ class Jawaban extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function komentarJawaban(){
+        return $this->hasMany('App\KomentarJawaban');
+    }
 }

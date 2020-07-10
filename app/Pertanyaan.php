@@ -61,6 +61,10 @@ class Pertanyaan extends Model
         return $this->hasMany('App\VotePertanyaan');
     }
 
+    public function komentarPertanyaan(){
+        return $this->hasMany('App\KomentarPertanyaan');
+    }
+
     public static function new_question($data, $id)
     {
         $new = DB::table('pertanyaan')->insert([
