@@ -99,7 +99,8 @@
                     <th tabindex="0" rowspan="1" colspan="1">Judul</th>
                     <th style="width: 150px" tabindex="0" rowspan="1" colspan="1">Tags</th>
                     <th style="width: 10px" tabindex="0" rowspan="1" colspan="1">Solved?</th>
-                    <th style="width: 10px"></th>
+                    <th style="width: 7px"></th>
+                    <th style="width: 7px"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -125,6 +126,11 @@
                       <a href="#" data-id="{{ $question->id }}" data-toggle="modal" data-target="#modal-delete"
                         class="btndelete btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
+                      </a>
+                    </td>
+                    <td>
+                      <a href="/pertanyaan/{{$question->id}}/edit" class="btndelete btn btn-warning btn-sm d-inline">
+                        <i class="fas fa-edit"></i>
                       </a>
                     </td>
                   </tr>

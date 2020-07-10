@@ -42,7 +42,7 @@ class PertanyaanController extends Controller
 
     public function create()
     {
-        return view('pages.question.new');
+        return view('pages.myquestion.new');
     }
 
     /**
@@ -101,7 +101,8 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
-        echo "EDIT PAGE";
+        $data = Pertanyaan::find($id);
+        return view('pages.myquestion.edit', compact('data'));
     }
 
     /**
@@ -113,7 +114,9 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "UPDATE PAGE";
+        $edit = Pertanyaan::edit($request, $id);
+
+        return redirect('/pertanyaan')->with('status', 'Pertanyaan berhasil diperbarui');
     }
 
     /**
