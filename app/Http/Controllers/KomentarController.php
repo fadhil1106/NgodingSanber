@@ -29,7 +29,8 @@ class KomentarController extends Controller
     
     public function edit($id)
     {
-        //
+        $data = KomentarPertanyaan::where('id', $id)->get();
+        return view('');
     }
 
     public function update(Request $request, $id)

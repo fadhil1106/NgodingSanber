@@ -29,7 +29,7 @@ class JawabanController extends Controller
                     ->withInput();
         }
         Jawaban::create($request->all());
-        return back();
+        return back()->with('message', 'Jawaban berhasil dibuat');
     }
 
     public function show($id)

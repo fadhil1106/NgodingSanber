@@ -41,3 +41,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/profile', 'ProfileController');
+
+Route::resource('/jawaban', 'JawabanController');
