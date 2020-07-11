@@ -87,7 +87,7 @@ class PertanyaanController extends Controller
     {
         $edit = Pertanyaan::edit($request, $id);
 
-        return redirect('/pertanyaan')->with('status', 'Pertanyaan berhasil diperbarui');
+        return redirect('/pertanyaan')->with('message', 'Pertanyaan berhasil diperbarui');
     }
 
     public function destroy(Pertanyaan $pertanyaan)
