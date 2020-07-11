@@ -35,8 +35,17 @@ class KomentarController extends Controller
 
     public function destroy($id)
     {
-        // $data = DB::table('komentar_pertanyaan')->where('id', $id)->get();
-        // return $data;
+        $message = '';
+        if (KomentarPertanyaan::find($id) !== null) {
+            $komentar = KomentarPertanyaan::find($id);
+            $komentar->delete();
+            $message = 'Success delete komentar pertanyaan!';
+        }elseif(KomentarJawaban::find($id) !== null){
+            $komentar = KomentarJawaban::find($id);
+            $komentar->delete();
+            $message = 'Success delete komentar jawaban!';
+        }
+        return back()->with('message',$message);
     }
 
     public function show($id)
