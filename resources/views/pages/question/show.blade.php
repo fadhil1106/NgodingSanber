@@ -122,8 +122,7 @@
 			<button type="button" class="btn btn-md btn-success col-md-12" data-toggle="modal"
 				data-target="#modal-new-answer">
 				Tambah Jawaban
-			</button> -->
-			<button type="button" class="btn btn-md btn-success col-md-12" data-toggle="modal" data-target="#jawab">Tambah Jawaban</button>
+			</button> 
 		</div>
 	</div>
 
