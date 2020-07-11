@@ -20,10 +20,16 @@ Route::resource('pertanyaan', 'PertanyaanController', ['names' =>[
     'destroy'   => 'pertanyaan.destroy' 
 ]]);
 
-Route::resource('komentar', 'komentarController', ['names' =>[
+Route::resource('komentar', 'KomentarController', ['names' =>[
     'store'    => 'komentar.store',
     'update'   => 'komentar.update',
     'destroy'   => 'komentar.destroy'
+]]);
+
+Route::resource('jawaban', 'JawabanController', ['names' =>[
+    'store'    => 'jawaban.store',
+    'update'   => 'jawaban.update',
+    'destroy'   => 'jawaban.destroy'
 ]]);
 
 Route::get('/myquestion', 'HomeController@index')->name('myhome');
@@ -31,6 +37,7 @@ Route::get('/myquestion', 'HomeController@index')->name('myhome');
 Route::get('/', function () {
     return redirect()->route('pertanyaan.home');
 })->name('home');
+
 Auth::routes();
 
 Route::resource('/profile', 'ProfileController');

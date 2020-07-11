@@ -61,5 +61,7 @@
 @endsection
 
 @push('script')
-
+  <script>
+    CKEDITOR.replace('isi');
+  </script>
 @endpush
