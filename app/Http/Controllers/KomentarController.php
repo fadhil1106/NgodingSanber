@@ -25,7 +25,8 @@ class KomentarController extends Controller
     
     public function edit($id)
     {
-        //
+        $data = KomentarPertanyaan::where('id', $id)->get();
+        return view('');
     }
 
     public function update(Request $request, $id)
@@ -36,13 +37,13 @@ class KomentarController extends Controller
     public function destroy($id)
     {
         // $data = DB::table('komentar_pertanyaan')->where('id', $id)->get();
-        // return $data;
+        // return $id;
     }
 
     public function show($id)
     {
         // Menghapus komentar,
-        $test = KomentarPertanyaan::find($id)->delete();
+        $test = KomentarPertanyaan::where('id', $id)->delete();
         return back()->with('message','Jawaban berhasil dihapus!');
     }
 }

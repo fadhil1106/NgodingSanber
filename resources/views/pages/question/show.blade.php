@@ -62,6 +62,7 @@
 											
 											@if ($commentQuestion->user->id == Auth::user()->id)
 											<a href="{{ route('komentar.destroy', $commentQuestion->id)}}" class="ml-2" style="color:#dc3545;">delete</a>
+											<a href="/komentar/{{$commentQuestion->id}}/edit" class="ml-2 text-warning">update</a>
 											<!-- <form action="/komentar/{{$commentQuestion->id}}" method="POST" class="d-inline">
 												@method('DELETE')@csrf
 												<button class="btn-danger"><i class="fas fa-trash"></i></button>
@@ -103,11 +104,45 @@
 			<h3 class="m-1 text-dark">{{ $answers->count() }} Jawaban</h3>
 		</div><!-- /.col -->
 		<div class="col-md-2">
-			<button type="button" class="btn btn-md btn-success col-md-12" data-card-widget="collapse">
+			<!-- <button type="button" class="btn btn-md btn-success col-md-12" data-card-widget="collapse">
 				Tambah Jawaban
-			</button>
+			</button> -->
+			<button type="button" class="btn btn-md btn-success col-md-12" data-toggle="modal" data-target="#jawab">Tambah Jawaban</button>
 		</div>
 	</div>
+
+	<!-- Modal Tambah Jawaban -->
+
+	<div class="modal fade" id="jawab" role="dialog" arialabelledby="ModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">	
+				<div class="modal-header bg-primary">
+					<h5 class="modal-title" id="exampleModalLabel">{{$question->judul}}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="{{ url('/jawaban')}}" method="POST">
+					@csrf
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">Jawab Pertanyaan</label>
+							<textarea class="form-control" id="message-text" rows="10" name="jawaban"></textarea>
+							<input type="text" name="jawaban_tepat" value="0" hidden>
+							<input type="text" name="pertanyaan_id" value="{{ $question->id }}" hidden>
+							<input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">gajadi</button>
+					<button type="submit" class="btn btn-primary">Kirim Jawaban</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 
 	@foreach ($answers as $answer)
 	<div class="row">
