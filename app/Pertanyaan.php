@@ -78,12 +78,14 @@ class Pertanyaan extends Model
 
     public static function edit($data, $id)
     {
-        $edit = DB::table('pertanyaan')->update([
-            'judul' => $data['judul'],
-            'isi' => $data['isi'],
-            'tag' => $data['tag'] 
-        ]);
+        $edit = DB::table('pertanyaan')
+            ->where('id', $id)
+            ->update([
+                'judul' => $data['judul'],
+                'isi' => $data['isi'],
+                'tag' => $data['tag'] 
+            ]);
 
-        return $data;
+        return $edit;
     }
 }

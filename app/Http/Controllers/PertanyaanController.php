@@ -42,7 +42,7 @@ class PertanyaanController extends Controller
         ]);
 
         $new = Pertanyaan::new_question($request, $id);
-        return redirect()->route('pertanyaan.home')->with('status', 'Pertanyaan berhasil ditambahkan');
+        return redirect()->route('pertanyaan.home')->with('message', 'Pertanyaan berhasil ditambahkan');
     }
 
     /**
