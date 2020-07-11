@@ -50,8 +50,6 @@ class KomentarController extends Controller
 
     public function show($id)
     {
-        // Menghapus komentar,
-        $test = KomentarPertanyaan::find($id)->delete();
-        return back()->with('message','Jawaban berhasil dihapus!');
+        
     }
 }
