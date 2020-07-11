@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\KomentarJawaban;
 use App\KomentarPertanyaan;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -34,6 +35,14 @@ class KomentarController extends Controller
 
     public function destroy($id)
     {
-        //
+        // $data = DB::table('komentar_pertanyaan')->where('id', $id)->get();
+        // return $data;
+    }
+
+    public function show($id)
+    {
+        // Menghapus komentar,
+        $test = KomentarPertanyaan::find($id)->delete();
+        return back()->with('message','Jawaban berhasil dihapus!');
     }
 }

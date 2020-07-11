@@ -59,9 +59,13 @@
 											{{ $commentQuestion->komentar }}. <br>
 											<a href="#"><i>{{ $commentQuestion->user->name }}</i></a>
 											<span class="ml-1"> {{ $commentQuestion->created_at }} </span>
-
+											
 											@if ($commentQuestion->user->id == Auth::user()->id)
-											<a href="#" class="ml-2" style="color:#dc3545;">delete</a>
+											<a href="{{ route('komentar.destroy', $commentQuestion->id)}}" class="ml-2" style="color:#dc3545;">delete</a>
+											<!-- <form action="/komentar/{{$commentQuestion->id}}" method="POST" class="d-inline">
+												@method('DELETE')@csrf
+												<button class="btn-danger"><i class="fas fa-trash"></i></button>
+											</form> -->
 											@endif
 
 										</small>
