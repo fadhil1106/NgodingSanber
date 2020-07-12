@@ -149,18 +149,19 @@
 					@else
 						<form style="display: inline;">
 					@endif
-						<input type="number" name="tepat" value="0" hidden>
-						<input type="number" name="solved" value="0" hidden>
 						<input type="number" name="question" value="{{ $question->id }}" hidden>
 						<input type="number" name="user" value="{{ $answer->user_id }}" hidden>
 						@if ($answer->jawaban_tepat)
+							<input type="number" name="solved" value="0" hidden>
 							<input type="number" name="reputasi" value="-15" hidden>
+							<input type="number" name="tepat" value="0" hidden>
 							<button type="{{ Auth::check() ? 'submit' : 'button'}}" class="btn bg-default m-0 p-1">
 								<span class="fas fa-check" style="color:#38c172"></span>
 							</button>
 						@else
 							@auth
 							@if (Auth::user()->id == $question->user->id)
+							<input type="number" name="solved" value="1" hidden>
 							<input type="number" name="reputasi" value="15" hidden>
 							<input type="number" name="tepat" value="1" hidden>
 							<button type="{{ Auth::check() ? 'submit' : 'button'}}" class="btn bg-default m-0 p-0">
