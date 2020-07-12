@@ -33,7 +33,8 @@
 
   <style>
     pre{
-      white-space: nowrap;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   </style>
 
