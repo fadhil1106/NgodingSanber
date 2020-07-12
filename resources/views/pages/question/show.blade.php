@@ -176,6 +176,10 @@
 							@method('PUT')
 							@csrf
 								<input type="number" name="tepat" value="0" hidden>
+								<input type="number" name="solved" value="0" hidden>
+								<input type="number" name="question" value="{{ $question->id }}" hidden>
+								<input type="number" name="reputasi" value="-15" hidden>
+								<input type="number" name="user" value="{{ $answer->user_id }}" hidden>
 								<button type="submit" class="btn btn-vote-width bg-default ml-4">
 									<span class="fas fa-check" style="color:#38c172"></span>
 								</button>
@@ -185,6 +189,10 @@
 							@method('PUT')
 							@csrf
 								<input type="number" name="tepat" value="1" hidden>
+								<input type="number" name="solved" value="1" hidden>
+								<input type="number" name="question" value="{{$question->id}}" hidden>
+								<input type="number" name="reputasi" value="15" hidden>
+								<input type="number" name="user" value="{{$answer->user_id}}" hidden>
 								<button type="submit" class="btn btn-vote-width bg-default ml-4">
 									<span class="fas fa-check"></span>
 								</button>
