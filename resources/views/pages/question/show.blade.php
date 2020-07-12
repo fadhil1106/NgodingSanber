@@ -164,12 +164,33 @@
 		<div class="col-md-1">
 			<div class="row">
 
+
 				@auth
-				@if ($answer->user->id != Auth::user()->id)
-				<button class="btn btn-vote-width">
-					<span class="fas fa-thumbs-up fa-2x" style="color:#38c172"></span>
-				</button>
-				@endif
+					@if ($answer->user->id != Auth::user()->id)
+					<button class="btn btn-vote-width">
+						<span class="fas fa-thumbs-up fa-2x" style="color:#38c172"></span>
+					</button>
+					@else
+						@if ($answer->jawaban_tepat)
+							<form action="/jawaban/{{$answer->id}}" method="POST">
+							@method('PUT')
+							@csrf
+								<input type="number" name="tepat" value="0" hidden>
+								<button type="submit" class="btn btn-vote-width bg-default ml-4">
+									<span class="fas fa-check" style="color:#38c172"></span>
+								</button>
+							</form>
+						@else
+							<form action="/jawaban/{{$answer->id}}" method="POST">
+							@method('PUT')
+							@csrf
+								<input type="number" name="tepat" value="1" hidden>
+								<button type="submit" class="btn btn-vote-width bg-default ml-4">
+									<span class="fas fa-check"></span>
+								</button>
+							</form>
+						@endif
+					@endif
 				@endauth
 
 			</div>
