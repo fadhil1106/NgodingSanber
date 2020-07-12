@@ -44,6 +44,8 @@
   <!-- /.modal-dialog -->
 </div>
 
+@auth
 <script>
   CKEDITOR.replace('jawaban');
 </script>
+@endauth
