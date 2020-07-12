@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Profile;
+use App\User;
+use App\Pertanyaan;
 class ProfileController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class ProfileController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        $profile = Profile::find($id)->first();
+        $profile = User::find($id)->first();
         return view('pages.profile.index', compact('profile'));
     }
 
@@ -48,7 +49,10 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $pertanyaan = Pertanyaan::where('user_id', $id)->get();
+        $solved = Pertanyaan::where('solved', 1)->where('user_id', $id);
+        $profile = User::find($id);
+        return view('pages.profile.index', compact('profile', 'pertanyaan', 'solved'));
     }
 
     /**
@@ -71,7 +75,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'photo' => 'required'
+        ]);
+
+        $user = User::find($id);
+        $user->update($request->all());
+        if($request->hasFile('photo')):
+            $request->file('photo')->move('images/profiles/', $request->file('photo')->getClientOriginalName());
+            $user->photo = $request->file('photo')->getClientOriginalName();
+            $user->save();
+        endif;
+        return back()->with('message', 'Foto profile berhasil di ubah');
     }
 
     /**

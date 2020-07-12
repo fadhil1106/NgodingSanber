@@ -45,7 +45,7 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="card-title">
-							<p><span class="text-primary">{{$question->user->name}}</span></p>
+							<p><a href="/profile/{{$question->user->id}}" class="text-primary">{{$question->user->name}}</a></p>
 							<strong>{{$question->judul}}</strong>
 						</div>
 						<div class="card-tools mt-2">
@@ -67,7 +67,8 @@
 									<p>
 										<small>
 											{{ $commentQuestion->komentar }}. <br>
-											<a href="#"><i>{{ $commentQuestion->user->name }}</i></a>
+											<a href="/profile/{{$commentQuestion->user->id}}">
+											<i>{{ $commentQuestion->user->name }}</i></a>
 											<span class="ml-1"> {{ $commentQuestion->created_at }} </span>
 
 											@auth
@@ -195,7 +196,9 @@
 					<div class="card-header">
 						<div class="card-title">
 							<pre class="m-0 p-0">{!!$answer->jawaban!!}</pre>
-							<div><span class="text-primary">{{$answer->user->name}}</span></div>
+							<div>
+							<a href="/profile/{{$answer->user->id}}" class="text-primary">{{$answer->user->name}}</a>
+							</div>
 						</div>
 						<div class="card-tools mt-2">
 							{{-- Kerjakan bagian ini --}}
