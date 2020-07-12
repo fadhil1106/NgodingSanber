@@ -47,7 +47,7 @@ class JawabanController extends Controller
     public function update(Request $request, $id)
     {
         $data = Jawaban::jawaban_tepat($request, $id);
-        // dump($data);
+        // dump($data)
         return back();
     }
 

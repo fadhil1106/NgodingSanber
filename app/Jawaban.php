@@ -52,9 +52,29 @@ class Jawaban extends Model
             'jawaban_tepat' => 0
         ]);
     
-        $pilih = DB::table('jawaban')->where('id', $id)->update([
-            'jawaban_tepat' => $request['tepat']
-        ]);
+        $tepat = DB::table('jawaban')
+            ->where('id', $id)
+            ->update([
+                'jawaban_tepat' => $request['tepat']
+            ]);
+
+        $solved = DB::table('pertanyaan')
+            ->where('id', $request['question'])
+            ->update([
+               'solved' => $request['solved']
+            ]);
+        
+        // Ngambil dulu data dari db, berapa reputasi usernya sebelum jawabanya di pilih sebagai jawaban paling tepat
+        $reputasi = DB::table('users')
+            ->where('id', $request['user'])
+            ->first();
+
+        // Baru, ditambahin 15 deh reputasinya
+        $reputaion = DB::table('users')
+            ->where('id', $request['user'])
+            ->update([
+                'reputasi' => $reputasi->reputasi + $request['reputasi']
+            ]);
 
     }
 }
