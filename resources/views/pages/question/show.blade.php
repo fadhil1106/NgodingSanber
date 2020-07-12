@@ -159,11 +159,15 @@
 								<span class="fas fa-check" style="color:#38c172"></span>
 							</button>
 						@else
+							@auth
+							@if (Auth::user()->id == $question->user->id)
 							<input type="number" name="reputasi" value="15" hidden>
 							<input type="number" name="tepat" value="1" hidden>
 							<button type="{{ Auth::check() ? 'submit' : 'button'}}" class="btn bg-default m-0 p-0">
 								<span class="fas fa-check"></span>
 							</button>
+							@endif
+							@endauth
 						@endif
 					</form>
 				</div>
