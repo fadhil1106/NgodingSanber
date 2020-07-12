@@ -49,14 +49,6 @@ class JawabanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'jawaban' => 'required|min:10'
-        ]);
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
         $data = Jawaban::jawaban_tepat($request, $id);
         // dump($data)
         return back();

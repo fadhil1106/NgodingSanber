@@ -20,7 +20,7 @@ class KomentarController extends Controller
     {
         // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'isi' => 'required|min:10'
+            'komentar' => 'required|min:5'
         ]);
         if ($validator->fails()) {
             return back()
