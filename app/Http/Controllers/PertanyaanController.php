@@ -9,6 +9,7 @@ use App\User;
 use App\Pertanyaan;
 use App\Jawaban;
 use App\KomentarPertanyaan;
+use App\VotePertanyaan;
 use Illuminate\Support\Facades\Session;
 
 class PertanyaanController extends Controller
@@ -36,8 +37,8 @@ class PertanyaanController extends Controller
     {
         $id = Auth::user()->id;
         $request->validate([
-            'judul' => 'required',
-            'isi' => 'required',
+            'judul' => 'required|min:10',
+            'isi' => 'required|min:10',
             'tag' => 'required'
         ]);
 
@@ -85,8 +86,8 @@ class PertanyaanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $edit = Pertanyaan::edit($request, $id);
 
+        $edit = Pertanyaan::edit($request, $id);
         return redirect('/pertanyaan')->with('message', 'Pertanyaan berhasil diperbarui');
     }
 
@@ -95,6 +96,40 @@ class PertanyaanController extends Controller
         $pertanyaan->delete();
         // Pertanyaan::where('id',$id)->delete();
         return redirect('/myquestion');
+    }
+
+    public function UpdateVotePertanyaan(Request $request, $id)
+    {
+        $question = Pertanyaan::find($id);
+        $reputasi = $question->user->reputasi;
+        $user = User::find($question->user_id);
+
+        $dataVote = VotePertanyaan::where([['user_id', '=', Auth::user()->id],['pertanyaan_id', '=', $question->id]])->get();
+        if (Auth::check()) {
+            if ($dataVote->isEmpty())  { 
+                if ($request->vote == 'upvote') {
+                    $user->reputasi = $reputasi+10;
+                }elseif($request->vote == 'downvote'){
+                    $user->reputasi = $reputasi-1;
+                }
+                $user->save();
+                $this->saveVote($request, $question->user_id, $id);
+            } else {
+                
+            }
+        }
+        return back();
+    }
+
+    public function saveVote($request, $userId, $pertanyaanId)
+    {
+        // dd($request->vote);
+        VotePertanyaan::create(
+            ['vote' => $request->vote, 
+            'user_id' => $userId,
+            'pertanyaan_id' => $pertanyaanId
+            ]
+        );
     }
 
     public function getTotalVote($dataVote)

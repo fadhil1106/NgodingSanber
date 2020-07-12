@@ -16,9 +16,13 @@
 
 					@auth
 					@if ($question->user->id != Auth::user()->id)
-					<button class="btn btn-vote-width">
-						<span class="fas fa-thumbs-up fa-2x" style="color:#38c172"></span>
-					</button>
+					<form action="{{ route('vote.pertanyaan',$question->id) }}" method="post" style="width: 100%">
+						@csrf
+						<input type="text" name="vote" id="upvotepertanyaan" value="upvote" hidden>
+						<button type="submit" class="btn btn-vote-width">
+							<span class="fas fa-thumbs-up fa-2x" style="color:#38c172"></span>
+						</button>
+					</form>
 					@endif
 					@endauth
 
@@ -33,9 +37,13 @@
 
 					@auth
 					@if ($question->user->id != Auth::user()->id)
-					<button class="btn btn-vote-width">
-						<span class="fas fa-thumbs-down fa-2x" style="color:#dc3545"></span>
-					</button>
+					<form action="{{ route('vote.pertanyaan',$question->id) }}" method="post" style="width: 100%">
+						@csrf
+						<input type="text" name="vote" id="downvotepertanyaan" value="downvote" hidden>
+						<button class="btn btn-vote-width">
+							<span class="fas fa-thumbs-down fa-2x" style="color:#dc3545"></span>
+						</button>
+					</form>
 					@endif
 					@endauth
 
@@ -45,7 +53,9 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="card-title">
-							<p><span class="text-primary">{{$question->user->name}}</span></p>
+							<p><span class="text-primary mr-2">{{$question->user->name}}</span>
+								<small>{{$question->created_at}}</small>
+							</p>
 							<strong>{{$question->judul}}</strong>
 						</div>
 						<div class="card-tools mt-2">
@@ -132,21 +142,26 @@
 			<div class="row">
 				@auth
 					@if ($answer->user->id != Auth::user()->id)
-					<button class="btn btn-vote-width">
-						<span class="fas fa-thumbs-up fa-2x" style="color:#38c172"></span>
-					</button>
+					<form action="{{ route('vote.jawaban',$answer->id) }}" method="post" style="width: 100%">
+						@csrf
+						<input type="text" name="vote" id="upvotejawaban" value="upvote" hidden>
+						<button type="submit" class="btn btn-vote-width">
+							<span class="fas fa-thumbs-up fa-2x" style="color:#38c172"></span>
+						</button>
+					</form>
 					@endif
 				@endauth
 
 			</div>
 			<div class="row">
 				<div class="text-total-vote" style="text-align: center">
-					<strong class="ml-4 pl-2">{{$answer->vote}}</strong>
 					@if (Auth::check())
+						<strong class="{{ Auth::user()->id == $question->user->id ? 'ml-4 pl-2' : ''}}">{{$answer->vote}}</strong>
 						<form action="/jawaban/{{$answer->id}}" method="POST" style="display: inline;">
 						@method('PUT')
 						@csrf
 					@else
+						<strong>{{$answer->vote}}</strong>
 						<form style="display: inline;">
 					@endif
 						<input type="number" name="question" value="{{ $question->id }}" hidden>
@@ -177,9 +192,13 @@
 
 				@auth
 					@if ($answer->user->id != Auth::user()->id)
-					<button class="btn btn-vote-width">
-						<span class="fas fa-thumbs-down fa-2x" style="color:#dc3545"></span>
-					</button>
+					<form action="{{ route('vote.jawaban',$answer->id) }}" method="post" style="width: 100%">
+						@csrf
+						<input type="text" name="vote" id="downvotejawaban" value="downvote" hidden>
+						<button class="btn btn-vote-width">
+							<span class="fas fa-thumbs-down fa-2x" style="color:#dc3545"></span>
+						</button>
+					</form>
 					@endif
 				@endauth
 

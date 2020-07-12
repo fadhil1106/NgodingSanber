@@ -20,11 +20,15 @@ Route::resource('pertanyaan', 'PertanyaanController', ['names' =>[
     'destroy'   => 'pertanyaan.destroy' 
 ]]);
 
+Route::post('pertanyaan/{pertanyaan}/vote', 'PertanyaanController@UpdateVotePertanyaan')->name('vote.pertanyaan');
+Route::post('jawaban/{jawaban}/vote', 'JawabanController@UpdateVoteJawaban')->name('vote.jawaban');
+
 Route::resource('komentar', 'KomentarController', ['names' =>[
     'store'    => 'komentar.store',
     'update'   => 'komentar.update',
     'destroy'   => 'komentar.destroy'
 ]]);
+
 
 Route::resource('jawaban', 'JawabanController', ['names' =>[
     'store'    => 'jawaban.store',
@@ -33,6 +37,7 @@ Route::resource('jawaban', 'JawabanController', ['names' =>[
 ]]);
 
 Route::get('/myquestion', 'HomeController@index')->name('myhome');
+
 
 Route::get('/', function () {
     return redirect()->route('pertanyaan.home');

@@ -7,6 +7,7 @@ use App\KomentarPertanyaan;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KomentarController extends Controller
 {
@@ -18,13 +19,22 @@ class KomentarController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'isi' => 'required|min:10'
+        ]);
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
         if (isset($request->jawaban_id)) { //harus cek jawaban dulu sebelum pertanyaan
             KomentarJawaban::create($request->all());
         }elseif(isset($request->pertanyaan_id)){
             KomentarPertanyaan::create($request->all());
         }
         $request->session()->flash('message', 'Komentar ditambahkan');
-        return redirect()->route('pertanyaan.show', $request->pertanyaan_id);
+        return back();
     }
     
     public function edit($id)

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Jawaban;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Jawaban;
+use App\VoteJawaban;
+use App\User;
 
 
 class JawabanController extends Controller
@@ -27,8 +30,8 @@ class JawabanController extends Controller
         ]);
         if ($validator->fails()) {
             return back()
-                    ->withErrors($validator)
-                    ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
         Jawaban::create($request->all());
         return back()->with('message', 'Jawaban berhasil dibuat');
@@ -46,6 +49,14 @@ class JawabanController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'jawaban' => 'required|min:10'
+        ]);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $data = Jawaban::jawaban_tepat($request, $id);
         // dump($data)
         return back();
@@ -54,5 +65,38 @@ class JawabanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function UpdateVoteJawaban(Request $request, $id)
+    {
+        $jawaban = Jawaban::find($id);
+        $dataVote = VoteJawaban::where([['user_id', '=', Auth::user()->id], ['jawaban_id', '=', $jawaban->id]])->get();
+        if (Auth::check()) {
+            if ($dataVote->isEmpty()) {
+                $reputasi = $jawaban->user->reputasi;
+                $user = User::find($jawaban->user_id);
+                if ($request->vote == 'upvote') {
+                    $user->reputasi = $reputasi + 10;
+                } elseif ($request->vote == 'downvote') {
+                    $user->reputasi = $reputasi - 1;
+                }
+                $user->save();
+                $this->saveVote($request, $jawaban->user_id, $id);
+            } else {
+                echo 'ada vote';
+            }
+        }
+        return back();
+    }
+
+    public function saveVote($request, $userId, $jawabanId)
+    {
+        // dd($request->vote);
+        VoteJawaban::create(
+            ['vote' => $request->vote, 
+            'user_id' => $userId,
+            'jawaban_id' => $jawabanId
+            ]
+        );
     }
 }
