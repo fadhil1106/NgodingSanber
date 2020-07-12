@@ -16,7 +16,7 @@ class CreateJawabanTable extends Migration
         Schema::create('jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('jawaban');
-            $table->boolean('jawaban_tepat');
+            $table->boolean('jawaban_tepat')->default(0);
             $table->unsignedBigInteger('pertanyaan_id');
             $table->foreign('pertanyaan_id')
                   ->references('id')
