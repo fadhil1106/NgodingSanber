@@ -64,11 +64,15 @@ class JawabanController extends Controller
 
     public function destroy($id)
     {
-        //
+        $data = Jawaban::find($id);
+        // dd($data);
+        $data->delete();
+        return back()->with('message', 'Jawaban berhasil dihapus');
     }
 
     public function UpdateVoteJawaban(Request $request, $id)
     {
+        $message='';
         $jawaban = Jawaban::find($id);
         $dataVote = VoteJawaban::where([['user_id', '=', Auth::user()->id], ['jawaban_id', '=', $jawaban->id]])->get();
         if (Auth::check()) {
@@ -82,11 +86,12 @@ class JawabanController extends Controller
                 }
                 $user->save();
                 $this->saveVote($request, $jawaban->user_id, $id);
+                $message = 'Berhasil Melakukan Vote';
             } else {
-                echo 'ada vote';
+                $message = 'Sudah Melakukan Vote';
             }
         }
-        return back();
+        return back()->with('message', $message);
     }
 
     public function saveVote($request, $userId, $jawabanId)

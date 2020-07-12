@@ -9,6 +9,9 @@
 			<i class="icon fas fa-info"></i> Login untuk vote dan berkomentar!
 		</div>
 		@endif
+		@if(session('message'))
+		<div class="alert alert-success alert-dismissible">{{ session('message')}}</div>
+		@endif
 		<!-- Small boxes (Stat box) -->
 		<div class="row">
 			<div class="col-md-1">
@@ -53,9 +56,8 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="card-title">
-							<p><span class="text-primary mr-2">{{$question->user->name}}</span>
-								<small>{{$question->created_at}}</small>
-							</p>
+							<p><a href="/profile/{{$question->user->id}}" class="text-primary">{{$question->user->name}}</a></p>
+							<small>{{$question->created_at}}</small>
 							<strong>{{$question->judul}}</strong>
 						</div>
 						<div class="card-tools mt-2">
@@ -77,7 +79,8 @@
 									<p>
 										<small>
 											{{ $commentQuestion->komentar }}. <br>
-											<a href="#"><i>{{ $commentQuestion->user->name }}</i></a>
+											<a href="/profile/{{$commentQuestion->user->id}}">
+											<i>{{ $commentQuestion->user->name }}</i></a>
 											<span class="ml-1"> {{ $commentQuestion->created_at }} </span>
 
 											@auth
@@ -214,11 +217,13 @@
 					<div class="card-header">
 						<div class="card-title">
 							<pre class="m-0 p-0">{!!$answer->jawaban!!}</pre>
-							<div><span class="text-primary">{{$answer->user->name}}</span></div>
+							<div>
+							<a href="/profile/{{$answer->user->id}}" class="text-primary">{{$answer->user->name}}</a>
+							</div>
 						</div>
 						<div class="card-tools mt-2">
 							{{-- Kerjakan bagian ini --}}
-							<form action="#" method="post" style="display: inline">
+							<form action="/jawaban/{{$answer->id}}" method="post" style="display: inline">
 								@method('delete')
 								@csrf
 								<button type="submit" class="btn btn-tool" style="color: #dc3545;">

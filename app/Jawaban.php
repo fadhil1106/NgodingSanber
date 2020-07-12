@@ -65,7 +65,7 @@ class Jawaban extends Model
             ]);
         
         // Ngambil dulu data dari db, berapa reputasi usernya sebelum jawabanya di pilih sebagai jawaban paling tepat
-        $reputasi = DB::table('users')
+        $ambil = DB::table('users')
             ->where('id', $request['user'])
             ->first();
 
@@ -73,7 +73,7 @@ class Jawaban extends Model
         $reputaion = DB::table('users')
             ->where('id', $request['user'])
             ->update([
-                'reputasi' => $reputasi->reputasi + $request['reputasi']
+                'reputasi' => $ambil->reputasi + $request['reputasi']
             ]);
 
     }

@@ -12,14 +12,14 @@
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
             @if (Auth::user())
-              <img src="{{ asset('images/profiles/mas mas.png')}}" class="img-circle elevation-2">
+              <img src="{{ asset('images/profiles/'. Auth::user()->photo)}}" class="img-circle elevation-2">
             @else
-              <img src="{{ asset('images/profiles/boxed-bg.png')}}" class="img-circle elevation-2">
+              <img src="{{ asset('images/profiles/white.png')}}" class="img-circle elevation-2">
             @endif
             </div>
             <div class="info">
               @if (Auth::user())
-              <a href="{{ url('/profile')}}" class="d-block">{{ Auth::user()->name }}</a>
+              <a href="/profile/{{ Auth::user()->id }}" class="d-block">{{ Auth::user()->name }}</a>
               @else
               <a href="{{ route('login')}}" class="d-block">Guest</a>
               @endif
