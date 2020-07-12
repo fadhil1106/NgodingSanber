@@ -142,18 +142,21 @@
 			<div class="row">
 				<div class="text-total-vote" style="text-align: center">
 					<strong class="ml-4 pl-2">{{$answer->vote}}</strong>
-					
-					<form action="/jawaban/{{$answer->id}}" method="POST" style="display: inline;">
+					@if (Auth::check())
+						<form action="/jawaban/{{$answer->id}}" method="POST" style="display: inline;">
 						@method('PUT')
 						@csrf
+					@else
+						<form style="display: inline;">
+					@endif
 						@if ($answer->jawaban_tepat)
 							<input type="number" name="tepat" value="0" hidden>
-							<button type="submit" class="btn bg-default m-0 p-1">
+							<button type="{{ Auth::check() ? 'submit' : 'button'}}" class="btn bg-default m-0 p-1">
 								<span class="fas fa-check" style="color:#38c172"></span>
 							</button>
 						@else
 							<input type="number" name="tepat" value="1" hidden>
-							<button type="submit" class="btn bg-default m-0 p-0">
+							<button type="{{ Auth::check() ? 'submit' : 'button'}}" class="btn bg-default m-0 p-0">
 								<span class="fas fa-check"></span>
 							</button>
 						@endif
