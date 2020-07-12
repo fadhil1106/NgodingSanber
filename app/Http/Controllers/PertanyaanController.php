@@ -100,11 +100,13 @@ class PertanyaanController extends Controller
 
     public function UpdateVotePertanyaan(Request $request, $id)
     {
+        $message='';
         $question = Pertanyaan::find($id);
         $reputasi = $question->user->reputasi;
         $user = User::find($question->user_id);
 
         $dataVote = VotePertanyaan::where([['user_id', '=', Auth::user()->id],['pertanyaan_id', '=', $question->id]])->get();
+       
         if (Auth::check()) {
             if ($dataVote->isEmpty())  { 
                 if ($request->vote == 'upvote') {
@@ -113,12 +115,13 @@ class PertanyaanController extends Controller
                     $user->reputasi = $reputasi-1;
                 }
                 $user->save();
-                $this->saveVote($request, $question->user_id, $id);
+                $this->saveVote($request, Auth::user()->id, $id);
+                $message = 'Berhasil melakukan '.$request->vote;
             } else {
-                
+                $message = 'Anda sudah melakukan vote';
             }
         }
-        return back();
+        return back()->with('message', $message);
     }
 
     public function saveVote($request, $userId, $pertanyaanId)

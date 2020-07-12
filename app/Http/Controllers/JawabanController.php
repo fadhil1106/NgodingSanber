@@ -85,7 +85,7 @@ class JawabanController extends Controller
                     $user->reputasi = $reputasi - 1;
                 }
                 $user->save();
-                $this->saveVote($request, $jawaban->user_id, $id);
+                $this->saveVote($request, Auth::user()->id, $id);
                 $message = 'Berhasil Melakukan Vote';
             } else {
                 $message = 'Sudah Melakukan Vote';
