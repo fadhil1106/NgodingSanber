@@ -166,7 +166,7 @@
 
 
 				@auth
-					@if ($answer->user->id != Auth::user()->id)
+					@if ($question->user->id != Auth::user()->id)
 					<button class="btn btn-vote-width">
 						<span class="fas fa-thumbs-up fa-2x" style="color:#38c172"></span>
 					</button>
@@ -202,7 +202,7 @@
 			<div class="row">
 
 				@auth
-				@if ($answer->user->id != Auth::user()->id)
+				@if ($question->user->id != Auth::user()->id)
 				<button class="btn btn-vote-width">
 					<span class="fas fa-thumbs-down fa-2x" style="color:#dc3545"></span>
 				</button>
