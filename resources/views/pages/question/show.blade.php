@@ -198,6 +198,14 @@
 							<div><span class="text-primary">{{$answer->user->name}}</span></div>
 						</div>
 						<div class="card-tools mt-2">
+							{{-- Kerjakan bagian ini --}}
+							<form action="#" method="post" style="display: inline">
+								@method('delete')
+								@csrf
+								<button type="submit" class="btn btn-tool" style="color: #dc3545;">
+									<i class="fas fa-trash"></i>
+								</button>
+							</form>
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
 								<i class="fas fa-minus"></i>
 							</button>
