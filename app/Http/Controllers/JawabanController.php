@@ -53,6 +53,9 @@ class JawabanController extends Controller
 
     public function destroy($id)
     {
-        //
+        $data = Jawaban::find($id);
+        // dd($data);
+        $data->delete();
+        return back()->with('message', 'Jawaban berhasil dihapus');
     }
 }

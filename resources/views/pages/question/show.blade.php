@@ -9,6 +9,9 @@
 			<i class="icon fas fa-info"></i> Login untuk vote dan berkomentar!
 		</div>
 		@endif
+		@if(session('message'))
+		<div class="alert alert-success alert-dismissible">{{ session('message')}}</div>
+		@endif
 		<!-- Small boxes (Stat box) -->
 		<div class="row">
 			<div class="col-md-1">
@@ -202,7 +205,7 @@
 						</div>
 						<div class="card-tools mt-2">
 							{{-- Kerjakan bagian ini --}}
-							<form action="#" method="post" style="display: inline">
+							<form action="/jawaban/{{$answer->id}}" method="post" style="display: inline">
 								@method('delete')
 								@csrf
 								<button type="submit" class="btn btn-tool" style="color: #dc3545;">
