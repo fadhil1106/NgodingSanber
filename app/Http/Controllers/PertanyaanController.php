@@ -54,7 +54,7 @@ class PertanyaanController extends Controller
     public function show($id)
     {
         $question = Pertanyaan::findOrFail($id);
-        $answers = Jawaban::orderBy('jawaban_tepat', 'desc')->get();
+        $answers = Jawaban::where('pertanyaan_id', $id)->orderBy('jawaban_tepat', 'desc')->get();
         // dd($commentsQuestion);
         $pertanyaan = new Pertanyaan;
         $jawaban = new Jawaban;
