@@ -46,4 +46,15 @@ class Jawaban extends Model
     public function komentarJawaban(){
         return $this->hasMany('App\KomentarJawaban');
     }
+
+    public static function jawaban_tepat($request, $id){
+        $reset = DB::table('jawaban')->update([
+            'jawaban_tepat' => 0
+        ]);
+    
+        $pilih = DB::table('jawaban')->where('id', $id)->update([
+            'jawaban_tepat' => $request['tepat']
+        ]);
+
+    }
 }

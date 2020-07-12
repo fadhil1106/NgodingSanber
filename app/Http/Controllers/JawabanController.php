@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Jawaban;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class JawabanController extends Controller
 {
@@ -44,7 +46,9 @@ class JawabanController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data = Jawaban::jawaban_tepat($request, $id);
+        // dump($data);
+        return back();
     }
 
     public function destroy($id)
