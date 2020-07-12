@@ -7,6 +7,7 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
+      @if (Auth::check())
       <form method="POST" action="{{ route('jawaban.store') }}">
         @csrf
         <div class="modal-body">
@@ -28,6 +29,15 @@
           <button type="submit" class="btn btn-primary">Jawab</button>
         </div>
       </form>
+      @else
+      <div class="modal-body">
+        Anda Belum Login
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+      </div>
+      @endif
     </div>
     <!-- /.modal-content -->
   </div>

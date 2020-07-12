@@ -52,9 +52,4 @@ class KomentarController extends Controller
         }
         return back()->with('message',$message);
     }
-
-    public function show($id)
-    {
-        
-    }
 }
